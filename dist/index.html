@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8"/>
+</head>
+<body>
+<div id="app"></div>
+</body>
+</html>
+<script>
+    function loadScript(name, onload){
+        var ref = document.createElement('script')
+        ref.setAttribute('type','text/javascript')
+        ref.setAttribute('src', name)
+        if(onload){
+            ref.onload = onload;
+        }
+        document.getElementsByTagName('head')[0].appendChild(ref);
+    }
+    var httpRequest = new XMLHttpRequest();
+    httpRequest.onreadystatechange = function(){
+        if (httpRequest.readyState === XMLHttpRequest.DONE && httpRequest.status === 200) {
+            var data = JSON.parse(httpRequest.responseText);
+            loadScript(data.vendors.js, function () {
+                loadScript(data.app.js);
+            });
+        }
+    };
+    httpRequest.open('GET', './webpack-assets.json', true);
+    httpRequest.send();
+</script>
