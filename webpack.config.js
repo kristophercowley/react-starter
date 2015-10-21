@@ -11,10 +11,8 @@ del('./build/*.js');
 
 var config = {
   entry: {
-    app: [
-      './app/main.js'
-    ],
-    vendors: ['react']
+    app: ['./app/main.js'],
+    vendors: ['react', 'react-dom', 'react-router']
   },
   output: {
     path: './build/',
@@ -22,10 +20,8 @@ var config = {
     chunkFilename: '[id].bundle.js',
     publicPath: '/'
   },
-  publicPath: './build/',
   module: {
     loaders: [{
-      // Javascript
       test: /\.jsx?$/, // Accepts either js or jsx
       loaders: ['babel']
     }, {
@@ -42,4 +38,4 @@ var config = {
   ]
 };
 
-module.exports = config;
+return module.exports = config;
