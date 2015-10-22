@@ -1,12 +1,35 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-export default class Activities extends Component {
+var Activities = class extends Component {
   render(){
     return (
       <div>
-        Activities
-        {this.props.children}
+        <div className="row">
+          <div className="col-sm-4">
+            Activities
+            <ul>
+              {this.props.activities.map(function(activity, key){
+                return <li key={key}>{activity.title}</li>;
+              })}
+            </ul>
+          </div>
+          <div className="col-sm-8">
+            {this.props.children}
+          </div>
+        </div>
       </div>
     );
   }
+};
+
+function search(state){
+  return {
+    activities: state.activities,
+    myActivities: state.myActivities
+  }
 }
+
+Activities = connect(search)(Activities);
+
+export default Activities;

@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
-export default class Activity extends Component {
+var Activity = class extends Component {
   render(){
     return (
       <div>
-        Activity
-        id = {this.props.params.id}
+        Activity Details
       </div>
     );
   }
-}
+};
+
+Activity = connect()(Activity);
+
+export default Activity;

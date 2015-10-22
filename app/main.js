@@ -1,28 +1,28 @@
-import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
-import { Router, Route, IndexRoute, Link } from 'react-router';
-import createBrowserHistory from 'history/lib/createBrowserHistory'
-import App from './components/app/App';
-import About from './components/about/About';
-import Activities from './components/activities/Activities';
-import Activity from './components/activity/Activity';
-import Home from './components/home/Home';
+import React from 'react';
+import {render} from 'react-dom';
+import { createStore, compose, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import {ReduxRouter, reduxReactRouter} from 'redux-router';
+import thunk from 'redux-thunk';
+import { autoRehydrate, persistStore } from 'redux-persist';
+import createHistory from 'history/lib/createBrowserHistory';
 
-let router = (
-  <Router history={createBrowserHistory()}>
-    <Route path="/" component={App}>
-      <IndexRoute component={Home} />
-      <Route path="about" component={About}/>
-      <Route path="activities" component={Activities}>
-        <Route path="/activity/:id" component={Activity} />
-      </Route>
-    </Route>
-  </Router>
-);
+import routes from './routes';
+import rootReducer from './reducers';
 
+let store = compose(
+  applyMiddleware(thunk),
+  autoRehydrate(),
+  reduxReactRouter({ routes, createHistory })
+)(createStore)(rootReducer);
 
+persistStore(store);
 
-ReactDOM.render(
-  router,
+render(
+  <div>
+    <Provider store={store}>
+      <ReduxRouter />
+    </Provider>
+  </div>,
   document.getElementById('app')
 );

@@ -1,9 +1,9 @@
 import './About.scss';
 import React, {Component} from 'react';
 import {Link} from 'react-router';
-import Header from '../header/Header';
+import {connect} from 'react-redux';
 
-export default class About extends Component {
+var About = class extends Component {
   render(){
     return (
       <div>
@@ -11,4 +11,8 @@ export default class About extends Component {
       </div>
     );
   }
-}
+};
+
+About = connect(state => state)(About);
+
+export default About

@@ -1,20 +1,40 @@
-import './App.scss';
-
 import React, {Component} from 'react'
-import { Link } from 'react-router'
-import Header from '../header/Header';
+import {connect} from 'react-redux';
 
-let state = {
-  title: 'Title set in state'
-}
+import './App.scss';
+import Nav from '../nav/Nav';
+import {setPageTitle} from '../../utils/site';
+import {fetchActivities, activitiesFetched} from '../../actions/activities';
 
-export default class App extends Component {
+let App = class extends Component {
+  componentWillMount(){
+    //let dispatch = this.props.dispatch;
+    //dispatch(fetchActivities())
+    //  .then(function(activities){
+    //    dispatch(activitiesFetched(activities));
+    //  });
+    setPageTitle(this.props);
+  }
+  componentWillReceiveProps(nextProps){
+    setPageTitle(nextProps);
+  }
   render() {
     return (
       <div>
-        <Header title={state.title} location={this.props.location}/>
-        {this.props.children}
+        <Nav location={this.props.location} />
+        <div className="container">
+          <div className="Header">
+            <h1>{this.props.site.title}</h1>
+          </div>
+          <div className="Main">
+            {this.props.children}
+          </div>
+        </div>
       </div>
     )
   }
-}
+};
+
+App = connect(state => state)(App);
+
+export default App;

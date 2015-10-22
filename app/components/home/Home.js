@@ -1,9 +1,9 @@
 import './Home.scss';
 
 import React, {Component} from 'react';
-import Header from '../header/Header';
+import {connect} from 'react-redux';
 
-export default class Home extends Component {
+var Home = class extends Component {
   render(){
     return (
       <div>
@@ -11,4 +11,8 @@ export default class Home extends Component {
       </div>
     );
   }
-}
+};
+
+Home = connect(state => state)(Home);
+
+export default Home
