@@ -12,9 +12,9 @@ export function removeMyActivity(id){
   return {type: REMOVE_MY_ACTIVITY, payload: { id }};
 }
 
-export function fetchActivities(){
+export async function fetchActivities(){
   return function(){
-    return new Promise(function (resolve, reject) {
+    return new Promise(function (resolve) {
       let activities = [
         {
           id: 1,
