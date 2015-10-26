@@ -4,6 +4,7 @@
  */
 
 var del = require('del');
+var path = require('path');
 var webpack = require('webpack');
 
 // Delete old builds
@@ -12,10 +13,11 @@ del('./build/*.js');
 var config = {
   entry: {
     app: ['./app/main.js'],
+    //tests: ['./tests/require.js'],
     vendors: ['react', 'react-dom', 'react-router']
   },
   output: {
-    path: './build/',
+    path: path.resolve('./build/'),
     filename: '[name].js',
     chunkFilename: '[id].bundle.js',
     publicPath: '/'
@@ -35,7 +37,10 @@ var config = {
   plugins: [
     // Create vendors bundle
     new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
-  ]
+  ],
+  node : {
+    fs: 'empty' // for tape
+  }
 };
 
 return module.exports = config;
