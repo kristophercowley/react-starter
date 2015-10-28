@@ -1,12 +1,13 @@
+import './App.scss';
+
 import React, {Component} from 'react'
 import {connect} from 'react-redux';
 
-import './App.scss';
 import Nav from '../nav/Nav';
 import {setPageTitle} from '../../utils/site';
 import {fetchActivities, activitiesFetched} from '../../actions/activities';
 
-let App = class extends Component {
+export class App extends Component {
   componentWillMount(){
     //let dispatch = this.props.dispatch;
     //dispatch(fetchActivities())
@@ -35,6 +36,4 @@ let App = class extends Component {
   }
 };
 
-App = connect(state => state)(App);
-
-export default App;
+export default connect(state => state)(App);

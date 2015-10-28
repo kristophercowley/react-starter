@@ -3,7 +3,7 @@ import './Home.scss';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-var Home = class extends Component {
+export class Home extends Component {
   render(){
     return (
       <div>
@@ -13,6 +13,4 @@ var Home = class extends Component {
   }
 };
 
-Home = connect(state => state)(Home);
-
-export default Home
+export default connect(state => state)(Home);

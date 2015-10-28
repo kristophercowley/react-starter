@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
-var Activity = class extends Component {
+export class Activity extends Component {
   render(){
     return (
       <div>
@@ -11,6 +11,4 @@ var Activity = class extends Component {
   }
 };
 
-Activity = connect()(Activity);
-
-export default Activity;
+export default connect()(Activity);
