@@ -22,11 +22,11 @@ export class App extends Component {
   render() {
     return (
       <div>
+        <div className="Header">
+          <h1>{this.props.site.title}</h1>
+        </div>
         <Nav location={this.props.location} />
         <div className="container">
-          <div className="Header">
-            <h1>{this.props.site.title}</h1>
-          </div>
           <div className="Main">
             {this.props.children}
           </div>

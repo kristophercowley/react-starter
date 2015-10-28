@@ -34,9 +34,6 @@ export default class extends Component {
             <li role="presentation" className={this.isActive('/activities')}>
               <Link to="/activities">Activities</Link>
             </li>
-            <li role="presentation" className={this.isActive('/activity/1')}>
-              <Link to="/activity/1">Activity 1</Link>
-            </li>
           </ul>
         </div>
       </nav>

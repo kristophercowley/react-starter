@@ -1,9 +1,16 @@
 import React, {Component} from 'react';
+import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
 export class ActivityItem extends Component {
   render(){
-    return <li>{this.props.activity.title}</li>;
+    return (
+      <li>
+        <Link to={`/activity/${this.props.activity.id}`}>
+          {this.props.activity.title}
+        </Link>
+      </li>
+    );
   }
 }
 

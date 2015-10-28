@@ -8,7 +8,9 @@ export class About extends Component {
   render(){
     return (
       <div>
-        About content
+        <p>
+          Content
+        </p>
       </div>
     );
   }

@@ -12,9 +12,20 @@ let routes = (
     <IndexRoute component={Home} title="Home" />
     <Route path="about" component={About} title="About"/>
     <Route path="activities" component={Activities} title="Activities">
-      <Route path="/activity/:id" component={Activity} title={(props) => `Activity ${props.params.id}`}/>
+      <Route path="/activity/:id" component={Activity} title={getActivityTitle}/>
     </Route>
   </Route>
 );
 
 export default routes;
+
+function getActivityTitle(props){
+  let id = parseInt(props.params.id);
+  let activity = props.activities.filter(function(activity){
+    return id === activity.id;
+  }).shift();
+  if(activity){
+    return activity.title;
+  }
+  return `Activity ${props.params.id}`;
+}
