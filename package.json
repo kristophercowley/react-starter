@@ -3,8 +3,8 @@
   "version": "0.0.1",
   "description": "",
   "scripts": {
-    "test": "jest --watch",
-    "start": "node server.js",
+    "test": "jest",
+    "test.watch": "jest --watch",
     "build": "webpack-dev-server --progress --colors --port 8080 --content-base build --history-api-fallback",
     "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js"
   },

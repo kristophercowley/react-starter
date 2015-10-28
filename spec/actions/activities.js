@@ -1,29 +1,39 @@
-import '../../jest_automock_off';
-import {ADD_MY_ACTIVITY, REMOVE_MY_ACTIVITY, FETCH_ACTIVITIES, ACTIVITIES_FETCHED} from '../../app/constants/ActionTypes';
-import {addMyActivity, removeMyActivity, fetchActivities, activitiesFetched} from '../../app/actions/activities';
+jest.autoMockOff();
+const actions = require('../../app/actions/activities');
+const types = require('../../app/constants/ActionTypes');
 
-describe('AddMyActivity', function(){
-  it('should return correct values', function() {
-    const returnedValue = addMyActivity(1);
-    expect(returnedValue.payload.id).toBe(1);
-    expect(returnedValue.type).toBe(ADD_MY_ACTIVITY);
-  });
-});
-
-describe('RemoveMyActivity', function(){
-  it('should return correct values', function () {
-    const returnedValue = removeMyActivity(1);
-    expect(returnedValue.payload.id).toBe(1);
-    expect(returnedValue.type).toBe(REMOVE_MY_ACTIVITY);
-  });
-});
-
-describe('FetchActivities', function() {
-  it('should return correct values', function(done){
-    fetchActivities()()
-      .then(function(returnValues){
+describe('Activities actions', function(){
+  it('should create an action to fetch all activities', function(){
+    actions.fetchActivities()()
+      .then(function (returnValues) {
         expect(returnValues.length).toBeGreaterThan(0);
         done();
       });
+  });
+  it('should create an action for activities have been fetched', function(){
+    const activities = [
+      {
+        id: 1,
+        title: 'Soccer',
+        description: 'My favorite sport'
+      }, {
+        id: 2,
+        title: 'Football',
+        description: 'Booooring'
+      }
+    ];
+    const returnedValue = actions.activitiesFetched(activities);
+    expect(returnedValue.payload.activities).toEqual(activities);
+    expect(returnedValue.type).toBe(types.ACTIVITIES_FETCHED);
+  });
+  it('should create an action to add an activity to my list', function(){
+    const returnedValue = actions.addMyActivity(1);
+    expect(returnedValue.payload.id).toBe(1);
+    expect(returnedValue.type).toBe(types.ADD_MY_ACTIVITY);
+  });
+  it('should create an action to remove an activity from my list', function(){
+    const returnedValue = actions.removeMyActivity(1);
+    expect(returnedValue.payload.id).toBe(1);
+    expect(returnedValue.type).toBe(types.REMOVE_MY_ACTIVITY);
   });
 });

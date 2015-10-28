@@ -3,7 +3,8 @@ import React, {Component} from 'react';
 import {Link} from 'react-router';
 import {connect} from 'react-redux';
 
-var About = class extends Component {
+// Export for testing
+export class About extends Component {
   render(){
     return (
       <div>
@@ -13,6 +14,5 @@ var About = class extends Component {
   }
 };
 
-About = connect(state => state)(About);
-
-export default About
+// Default export connected component
+export default connect(state => state)(About)

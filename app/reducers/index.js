@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
+import { routerStateReducer as router } from 'redux-router';
 import activities from './activities';
 import myActivities from './myActivities';
 import site from './site';
-import { routerStateReducer as router } from 'redux-router';
 
 const rootReducer = combineReducers({
   router,
