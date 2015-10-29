@@ -1,42 +1,57 @@
 import './Nav.scss';
 
 import React, {Component} from 'react';
-import {Link} from 'react-router';
+import {connect} from 'react-redux';
+import {pushState} from 'redux-router';
+import {namedRoutes as menuItems} from '../../routes';
+import {AppBar, Card, CardHeader, Avatar, LeftNav} from 'material-ui';
 
-export default class extends Component {
+const header = (
+  <Card>
+    <CardHeader
+      title="Our App"
+      subtitle="Some details"
+      avatar={<Avatar>A</Avatar>}/>
+  </Card>
+);
+
+export class Nav extends Component {
   isActive(route){
     return route === this.props.location.pathname ? 'active' : '';
   }
+  _openSidebar(e){
+    e.preventDefault();
+    this.refs.leftNav.toggle();
+  }
+  _getSelectedIndex() {
+    if(this.props.router){
+      for(let i = 0; i < menuItems.length; i++){
+        if(menuItems[i].route == this.props.router.location.pathname){
+          return i;
+        }
+      }
+    }
+  }
+  _onLeftNavChange(e, key, payload) {
+    // Do DOM Diff refresh
+    this.props.pushState({}, payload.route)
+  }
   render(){
     return (
-      <nav className="navbar navbar-default">
-        <div className="container-fluid">
-          <div className="navbar-head">
-            <button type="button" className="navbar-toggle collapsed"
-                    data-toggle="collapse"
-                    data-target="#navbar-collapse"
-                    aria-expanded="false">
-              <span className="sr-only">Toggle navigation</span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-              <span className="icon-bar"></span>
-            </button>
-          </div>
-        </div>
-        <div className="collapse navbar-collapse" id="navbar-collapse">
-          <ul className="nav navbar-nav">
-            <li role="presentation" className={this.isActive('/')}>
-              <Link to="/">Home</Link>
-            </li>
-            <li role="presentation" className={this.isActive('/about')}>
-              <Link to="/about">About</Link>
-            </li>
-            <li role="presentation" className={this.isActive('/activities')}>
-              <Link to="/activities">Activities</Link>
-            </li>
-          </ul>
-        </div>
+      <nav>
+        <AppBar
+          iconClassNameRight="muidocs-icon-navigation-expand-more"
+          onLeftIconButtonTouchTap={e => this._openSidebar(e)}/>
+        <LeftNav ref="leftNav" docked={false}
+                 header={header}
+                 menuItems={menuItems}
+                 selectedIndex={this._getSelectedIndex()}
+                 onChange={(e, key, payload) => { this._onLeftNavChange(e, key, payload) }}/>
       </nav>
     );
   }
 }
+
+export default connect(state => {
+  return { router: state.router };
+}, { pushState })(Nav)

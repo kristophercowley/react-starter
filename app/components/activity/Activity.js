@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import {CardTitle, CardHeader} from 'material-ui';
 
 export class Activity extends Component {
   render(){

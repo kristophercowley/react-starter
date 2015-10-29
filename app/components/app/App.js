@@ -6,6 +6,7 @@ import {connect} from 'react-redux';
 import Nav from '../nav/Nav';
 import {setPageTitle} from '../../utils/site';
 import {fetchActivities, activitiesFetched} from '../../actions/activities';
+import {Card, CardTitle, CardText} from 'material-ui';
 
 export class App extends Component {
   componentWillMount(){
@@ -22,15 +23,10 @@ export class App extends Component {
   render() {
     return (
       <div>
-        <div className="Header">
-          <h1>{this.props.site.title}</h1>
-        </div>
         <Nav location={this.props.location} />
-        <div className="container">
-          <div className="Main">
-            {this.props.children}
-          </div>
-        </div>
+        <Card>
+          {this.props.children}
+        </Card>
       </div>
     )
   }

@@ -7,7 +7,13 @@ import Activities from './components/activities/Activities';
 import Activity from './components/activity/Activity';
 import Home from './components/home/Home';
 
-let routes = (
+export const namedRoutes = [
+  { route: '/', text: 'Home' },
+  { route: '/about', text: 'About' },
+  { route: '/activities', text: 'Activities' }
+];
+
+export default (
   <Route path="/" component={App}>
     <IndexRoute component={Home} title="Home" />
     <Route path="about" component={About} title="About"/>
@@ -16,8 +22,6 @@ let routes = (
     </Route>
   </Route>
 );
-
-export default routes;
 
 function getActivityTitle(props){
   let id = parseInt(props.params.id);
