@@ -13,7 +13,6 @@ del('./build/*.js');
 var config = {
   entry: {
     app: ['./app/main.js'],
-    //tests: ['./tests/require.js'],
     vendors: ['react', 'react-dom', 'react-router']
   },
   output: {

@@ -2,7 +2,8 @@ jest.dontMock('../../app/components/activities/Activities');
 
 const React = require('react');
 const TestUtils = require('react-addons-test-utils');
-const {Activities, ActivitiesList, ActivityItem, search} = require('../../app/components/activities/Activities');
+const {Activities, search} = require('../../app/components/activities/Activities');
+import {Card} from 'material-ui';
 
 const activities = [
   {title: 'Activity 1'},
@@ -11,20 +12,11 @@ const activities = [
 
 describe('Activities component', function(){
   let output = TestUtils.renderIntoDocument(<Activities activities={activities} />);
-  it('should contain ActivitiesList component', function(){
+  it('should contain Card component', function(){
     expect(
-      TestUtils.scryRenderedComponentsWithType(output, ActivitiesList).length
+      TestUtils.scryRenderedComponentsWithType(output, Card).length
     ).toBeGreaterThan(0);
   });
-});
-
-describe('ActivitiesList component', function(){
-  let output = TestUtils.renderIntoDocument(<ActivitiesList activities={activities} />);
-  it('should contain ActivityItems', function(){
-    expect(
-      TestUtils.scryRenderedComponentsWithType(output, ActivityItem).length
-    ).toEqual(2);
-  })
 });
 
 describe('Activities redux search', function(){

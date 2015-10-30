@@ -1,3 +1,5 @@
+import './Activities.scss';
+
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {Link} from 'react-router';
@@ -7,13 +9,13 @@ import {Avatar, Card, CardHeader, CardText, CardTitle} from 'material-ui';
 export class Activities extends Component {
   render() {
     return (
-      <div>
+      <div className="Activities">
         <CardTitle title="Activities" subtitle="These are our activities"/>
         <div className="ActivitiesList">
-          {this.props.activities.map(function(activity) {
+          {this.props.activities.map(function(activity, key) {
             return (
-              <Link to={`/activity/${activity.id}`} key={activity.id}>
-                <Card key={activity.id}>
+              <Link to={`/activity/${activity.id}`} key={key}>
+                <Card>
                   <CardHeader title={activity.title} avatar={<Avatar>A</Avatar>}/>
                   <CardText>
                     {activity.description}
@@ -23,12 +25,7 @@ export class Activities extends Component {
             );
           }.bind(this))}
         </div>
-        {
-          this.props.children ?
-            <Card>
-              {this.props.children}
-            </Card> : ''
-        }
+        {this.props.children ? <Card>{this.props.children}</Card> : ''}
       </div>
     );
   }
