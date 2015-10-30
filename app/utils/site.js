@@ -1,48 +1,48 @@
 import {setTitle} from '../actions/site';
 
 /*
-  @description Get the title from the Router or IndexPath component
-  @todo: is there a more elegant way to achieve this?
+ @description Get the title from the Router or IndexPath component
+ @todo: is there a more elegant way to achieve this?
  */
-function getTitle(props){
+function getTitle(props) {
   let path = props.location.pathname, title = 'Default title';
-  if(path === '/'){
+  if (path === '/') {
     return props.route.indexRoute.title;
   }
 
-  if(path.indexOf('/') === 0){
+  if (path.indexOf('/') === 0) {
     path = path.slice(1);
   }
-  props.routes.forEach(function(route){
+  props.routes.forEach(function(route) {
     let routePath = route.path;
-    if(routePath && routePath.indexOf(':') > -1){
+    if (routePath && routePath.indexOf(':') > -1) {
       let pattern = '';
       routePath.split('/').forEach(piece => {
-        if(piece && piece.indexOf(':') > -1){
+        if (piece && piece.indexOf(':') > -1) {
           pattern += '/*[0-9]';
-        } else if(piece){
+        } else if (piece) {
           pattern += piece;
         }
       });
       let regex = new RegExp(pattern);
-      if(regex.test(path)){
+      if (regex.test(path)) {
         title = route.title;
       }
-    } else if(route.path == path){
+    } else if (route.path == path) {
       title = route.title;
     }
   });
 
-  if(typeof title === 'function'){
+  if (typeof title === 'function') {
     title = title(props);
   }
 
   return title;
 }
 
-export function setPageTitle(props){
+export function setPageTitle(props) {
   let title = getTitle(props);
-  if(title !== props.site.title){
+  if (title !== props.site.title) {
     props.dispatch(setTitle(title));
   }
 }

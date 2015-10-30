@@ -5,10 +5,10 @@ import {connect} from 'react-redux';
 import {CardTitle, CardText} from 'material-ui';
 
 export class Home extends Component {
-  render(){
+  render() {
     return (
       <div>
-        <CardTitle title="Home" subtitle="This is our home page" />
+        <CardTitle title="Home" subtitle="This is our home page"/>
         <CardText>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit.
           Donec mattis pretium massa. Aliquam erat volutpat. Nulla facilisi.
@@ -18,6 +18,6 @@ export class Home extends Component {
       </div>
     );
   }
-};
+}
 
 export default connect(state => state)(Home);

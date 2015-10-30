@@ -1,6 +1,6 @@
 import { ADD_MY_ACTIVITY, REMOVE_MY_ACTIVITY } from '../constants/ActionTypes';
 
-export default function (state = [], action) {
+export default function(state = [], action) {
   switch (action.type) {
     case ADD_MY_ACTIVITY:
       return [...state, action.payload.id];

@@ -17,7 +17,7 @@ injectTapEventPlugin();
 let store = compose(
   applyMiddleware(thunk),
   autoRehydrate(),
-  reduxReactRouter({ routes, createHistory })
+  reduxReactRouter({routes, createHistory})
 )(createStore)(rootReducer);
 
 persistStore(store);

@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {CardTitle, CardHeader} from 'material-ui';
 
 export class Activity extends Component {
-  render(){
+  render() {
     let title = '';
-    if(this.props.activity){
+    if (this.props.activity) {
       title = this.props.activity.title;
     }
     return (
@@ -17,15 +16,15 @@ export class Activity extends Component {
       </div>
     );
   }
-};
+}
 
-export function search(state){
+export function search(state) {
   const id = parseInt(state.router.params.id);
   return {
-    activity: state.activities.filter(function(activity){
+    activity: state.activities.filter(function(activity) {
       return activity.id === id;
     }).shift()
-  }
+  };
 }
 
 export default connect(search)(Activity);

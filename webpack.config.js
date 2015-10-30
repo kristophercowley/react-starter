@@ -1,10 +1,10 @@
 /*
-  @author: Matt Berg
-  @reference: https://christianalfoni.github.io/react-webpack-cookbook/index.html
+ @author: Matt Berg
+ @reference: https://christianalfoni.github.io/react-webpack-cookbook/index.html
  */
 
-var del = require('del');
-var path = require('path');
+var del     = require('del');
+var path    = require('path');
 var webpack = require('webpack');
 
 // Delete old builds
@@ -23,22 +23,18 @@ var config = {
     publicPath: '/'
   },
   module: {
-    loaders: [{
-      test: /\.jsx?$/, // Accepts either js or jsx
-      loaders: ['babel']
-    }, {
-      test: /\.scss$/,
-      loader: 'style!css!sass'
-    }, {
-      test: /\.(png|jpg)$/,
-      loader: 'url?limit=25000'
-    }]
+    loaders: [
+      {test: /\.jsx?$/, loaders: ['babel'], exclude: /node_modules/},
+      {test: /\.js$/, loader: "eslint-loader", exclude: /node_modules/},
+      {test: /\.scss$/, loader: 'style!css!sass'},
+      {test: /\.(png|jpg)$/, loader: 'url?limit=25000'}
+    ]
   },
   plugins: [
     // Create vendors bundle
     new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
   ],
-  node : {
+  node: {
     fs: 'empty' // for tape
   }
 };

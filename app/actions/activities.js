@@ -13,8 +13,8 @@ export function removeMyActivity(id) {
 }
 
 export function fetchActivities() {
-  return function () {
-    return new Promise(function (resolve, reject) {
+  return function() {
+    return new Promise(function(resolve) {
       var activities = [
         {
           id: 1,
@@ -28,7 +28,7 @@ export function fetchActivities() {
       ];
       resolve(activities);
     });
-  }
+  };
 }
 export function activitiesFetched(activities) {
   return {type: ACTIVITIES_FETCHED, payload: {activities: activities}};

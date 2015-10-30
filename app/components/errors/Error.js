@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 
 export default class extends Component {
-  render(){
+  render() {
     return (
       <div>
         <h1>Error</h1>

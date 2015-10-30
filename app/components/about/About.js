@@ -1,12 +1,11 @@
 import './About.scss';
 import React, {Component} from 'react';
-import {Link} from 'react-router';
 import {connect} from 'react-redux';
 import {CardTitle, CardText} from 'material-ui';
 
 // Export for testing
 export class About extends Component {
-  render(){
+  render() {
     return (
       <div>
         <CardTitle title="About" subtitle="About our app"/>
@@ -19,7 +18,7 @@ export class About extends Component {
       </div>
     );
   }
-};
+}
 
 // Default export connected component
-export default connect(state => state)(About)
+export default connect(state => state)(About);
