@@ -1,13 +1,25 @@
+@import '../variables.scss';
+
+* {
+  font-family: 'Lato', 'Verdana', 'sans-serif';
+}
+
 body {
   background-color: #fefefe;
 }
 
-.Header {
-  h1 {
-    color: purple;
-  }
-}
-
 .Main {
-
+  color: $darkGrey;
+  h1 {
+    font-family: 'Oswald', 'Helvetica', 'Arial', 'sans-serif';
+    text-transform: uppercase;
+  }
+  @media (min-width: $screen-md-min) {
+    width: 75%;
+    max-width: $screen-sm-min;
+    margin: 30px auto;
+  }
+  @media (max-width: $screen-sm-max) {
+    margin: 30px 15px;
+  }
 }

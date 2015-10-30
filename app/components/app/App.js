@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 
 import Nav from '../nav/Nav';
 import {setPageTitle} from '../../utils/site';
-import {Card} from 'material-ui';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 import MyRawTheme from '../../material-theme';
 //import {fetchActivities, activitiesFetched} from '../../actions/activities';
@@ -14,6 +13,7 @@ export class App extends Component {
 
   constructor(props) {
     super(props);
+    // Add initial app data fetch here
     //let dispatch = this.props.dispatch;
     //dispatch(fetchActivities())
     //  .then(function(activities){
@@ -36,9 +36,9 @@ export class App extends Component {
     return (
       <div>
         <Nav location={this.props.location}/>
-        <Card>
+        <div className="Main">
           {this.props.children}
-        </Card>
+        </div>
       </div>
     );
   }

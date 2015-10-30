@@ -6,20 +6,22 @@ import About from './components/about/About';
 import Activities from './components/activities/Activities';
 import Activity from './components/activity/Activity';
 import Home from './components/home/Home';
+import NotFound from './components/errors/NotFound';
 
 export const namedRoutes = [
   {route: '/', text: 'Home'},
   {route: '/about', text: 'About'},
-  {route: '/activities', text: 'Activities'}
+  {route: '/activities', text: 'Activities'},
+  {route: '/pageNotFound', 'text': 'Page Not Found'}
 ];
 
 export default (
   <Route component={App} path="/">
     <IndexRoute component={Home} title="Home"/>
-    <Route component={About} path="about" title="About" />
-    <Route component={Activities} path="activities" title="Activities">
-      <Route component={Activity} path="/activity/:id" title={getActivityTitle} />
-    </Route>
+    <Route path="about" component={About} title="About" />
+    <Route path="activities" component={Activities} title="Activities" />
+    <Route path="/activity/:id" component={Activity} title={getActivityTitle} />
+    <Route path="*" component={NotFound}/>
   </Route>
 );
 

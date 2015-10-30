@@ -2,30 +2,29 @@ import './Activities.scss';
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Link} from 'react-router';
-import {Avatar, Card, CardHeader, CardText, CardTitle} from 'material-ui';
+import {List, ListItem} from 'material-ui';
 
 // Export here for testing
 export class Activities extends Component {
+  _handleClick(activityId){
+    this.props.history.pushState(null, `/activity/${activityId}`);
+  }
+
   render() {
     return (
       <div className="Activities">
-        <CardTitle title="Activities" subtitle="These are our activities"/>
-        <div className="ActivitiesList">
-          {this.props.activities.map(function(activity, key) {
-            return (
-              <Link to={`/activity/${activity.id}`} key={key}>
-                <Card>
-                  <CardHeader title={activity.title} avatar={<Avatar>A</Avatar>}/>
-                  <CardText>
-                    {activity.description}
-                  </CardText>
-                </Card>
-              </Link>
-            );
-          }.bind(this))}
-        </div>
-        {this.props.children ? <Card>{this.props.children}</Card> : ''}
+        <h1>Activities</h1>
+        <List>
+        {this.props.activities.map(function(activity, key) {
+          return (
+            <ListItem
+                key={key}
+                onTouchTap={() => this._handleClick(activity.id)}
+                primaryText={activity.title}
+                secondaryText={activity.description} />
+          );
+        }.bind(this))}
+        </List>
       </div>
     );
   }

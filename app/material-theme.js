@@ -15,12 +15,11 @@ const colors = {
 
 export default {
   spacing: Spacing,
-  fontFamily: 'Helvetica Neue, Helvetica, Arial',
   palette: {
-    primary1Color: colors.orange,
+    primary1Color: colors.darkBlue,
     primary2Color: ColorManipulator.darken(colors.orange, 0.1),
     primary3Color: colors.darkGrey,
-    accent1Color: colors.blue,
+    accent1Color: colors.orange,
     accent2Color: colors.grey,
     accent3Color: ColorManipulator.darken(colors.grey, 0.1),
     textColor: colors.darkGrey,
