@@ -19,12 +19,10 @@ export class Nav extends Component {
   isActive(route) {
     return route === this.props.location.pathname ? 'active' : '';
   }
-
   _openSidebar(e) {
     e.preventDefault();
     this.refs.leftNav.toggle();
   }
-
   _getSelectedIndex() {
     if (this.props.router) {
       for (let i = 0; i < menuItems.length; i++) {
@@ -34,12 +32,10 @@ export class Nav extends Component {
       }
     }
   }
-
   _onLeftNavChange(e, key, payload) {
     // Do DOM Diff refresh
     this.props.pushState({}, payload.route);
   }
-
   render() {
     return (
       <nav>
