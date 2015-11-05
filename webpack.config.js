@@ -11,6 +11,7 @@ var webpack = require('webpack');
 del('./build/*.js');
 
 var config = {
+  devtool: 'source-map',
   entry: {
     app: ['./app/main.js'],
     vendors: ['react', 'react-dom', 'react-router']

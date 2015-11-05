@@ -11,6 +11,7 @@ var AssetsPlugin = require('assets-webpack-plugin');
 del('./dist/*.js');
 
 var config = {
+  devtool: 'source-map',
   entry: {
     app: './app/main.js',
     vendors: ['react']
@@ -35,6 +36,7 @@ var config = {
     }]
   },
   plugins: [
+    new webpack.optimize.UglifyJsPlugin({minimize: true}),
     new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.[hash].js'),
     new AssetsPlugin(),
     new webpack.NoErrorsPlugin()

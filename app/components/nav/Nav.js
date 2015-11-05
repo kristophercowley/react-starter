@@ -6,11 +6,6 @@ import {AppBar, Avatar, Card, CardHeader, LeftNav, IconButton, FontIcon} from 'm
 import {menuItems} from '../../routes';
 import history from '../../history';
 
-history.listenBefore(function(location){
-  // Make sure we've got something to go back to
-  return !!location && !!location.pathname;
-});
-
 const header = (
   <Card>
     <CardHeader
