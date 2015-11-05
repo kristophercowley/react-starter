@@ -2,11 +2,11 @@ import './App.scss';
 
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
+import ThemeManager from 'material-ui/lib/styles/theme-manager';
 
 import Nav from '../nav/Nav';
 import {setPageTitle} from '../../utils/site';
-import ThemeManager from 'material-ui/lib/styles/theme-manager';
-import MyRawTheme from '../../material-theme';
+import MaterialTheme from '../../material-theme';
 //import {fetchActivities, activitiesFetched} from '../../actions/activities';
 
 export class App extends Component {
@@ -21,17 +21,14 @@ export class App extends Component {
     //  });
     setPageTitle(this.props);
   }
-
   getChildContext() {
     return {
-      muiTheme: ThemeManager.getMuiTheme(MyRawTheme)
+      muiTheme: ThemeManager.getMuiTheme(MaterialTheme)
     };
   }
-
   componentWillReceiveProps(nextProps) {
     setPageTitle(nextProps);
   }
-
   render() {
     return (
       <div>

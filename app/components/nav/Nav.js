@@ -2,12 +2,15 @@ import './Nav.scss';
 
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {pushState} from 'redux-router';
-import {namedRoutes as menuItems} from '../../routes';
 import {AppBar, Avatar, Card, CardHeader, LeftNav, IconButton, FontIcon} from 'material-ui';
-import createHistory from 'history/lib/createBrowserHistory';
+import {menuItems} from '../../routes';
+import history from '../../history';
 
-const history = createHistory();
+history.listenBefore(function(location){
+  // Make sure we've got something to go back to
+  return !!location && !!location.pathname;
+});
+
 const header = (
   <Card>
     <CardHeader
@@ -17,39 +20,26 @@ const header = (
   </Card>
 );
 const pathsThatRequireBackButton = [
-  '/activity'
+  '/activity',
+  '/pageNotFound'
 ];
 
 export class Nav extends Component {
   isActive(route) {
     return route === this.props.location.pathname ? 'active' : '';
   }
-
-  _openSidebar(e) {
-    e.preventDefault();
-    this.refs.leftNav.toggle();
-  }
-
-  _goBack(e){
-    e.preventDefault();
-    history.goBack();
-  }
-
   _getSelectedIndex() {
-    if (this.props.router) {
+    if (this.props.location) {
       for (let i = 0; i < menuItems.length; i++) {
-        if (menuItems[i].route == this.props.router.location.pathname) {
+        if (menuItems[i].route == this.props.location.pathname) {
           return i;
         }
       }
     }
   }
-
   _onLeftNavChange(e, key, payload) {
-    // Do DOM Diff refresh
-    this.props.pushState({}, payload.route);
+    history.pushState({}, payload.route);
   }
-
   _shouldShowBackButton(path){
     let show = false;
     pathsThatRequireBackButton.forEach(function(match){
@@ -60,25 +50,8 @@ export class Nav extends Component {
 
     return show;
   }
-
   render() {
-    let appBar, showBackButton = this._shouldShowBackButton(this.props.location.pathname);
-    if(showBackButton){
-      appBar = (
-        <AppBar
-            iconElementLeft={
-              <IconButton onClick={e => this._goBack(e)}>
-                <FontIcon className="material-icons">arrow_back</FontIcon>
-              </IconButton>
-            }/>
-      );
-    } else {
-      appBar = (
-        <AppBar
-            iconClassNameRight="muidocs-icon-navigation-expand-more"
-            onLeftIconButtonTouchTap={e => this._openSidebar(e)}/>
-      );
-    }
+    let showBackButton = this._shouldShowBackButton(this.props.location.pathname);
     return (
       <nav>
         <LeftNav ref="leftNav" docked={false}
@@ -86,7 +59,20 @@ export class Nav extends Component {
             menuItems={menuItems}
             onChange={(e, key, payload) => this._onLeftNavChange(e, key, payload)}
             selectedIndex={this._getSelectedIndex()}/>
-        {appBar}
+        {
+          showBackButton ? (
+            <AppBar
+                iconElementLeft={
+                  <IconButton onClick={() => history.goBack()}>
+                    <FontIcon className="material-icons">arrow_back</FontIcon>
+                  </IconButton>
+                }/>
+          ) : (
+            <AppBar
+                iconClassNameRight="muidocs-icon-navigation-expand-more"
+                onLeftIconButtonTouchTap={() => this.refs.leftNav.toggle()}/>
+          )
+        }
 
       </nav>
     );
@@ -95,4 +81,4 @@ export class Nav extends Component {
 
 export default connect(state => {
   return {router: state.router};
-}, {pushState})(Nav);
+})(Nav);

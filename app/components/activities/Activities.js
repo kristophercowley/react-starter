@@ -3,11 +3,12 @@ import './Activities.scss';
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import {List, ListItem} from 'material-ui';
+import history from '../../history';
 
 // Export here for testing
 export class Activities extends Component {
   _handleClick(activityId){
-    this.props.history.pushState(null, `/activity/${activityId}`);
+    history.pushState(null, `/activity/${activityId}`);
   }
 
   render() {

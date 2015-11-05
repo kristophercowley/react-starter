@@ -2,18 +2,22 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 export class Activity extends Component {
+  _getActivity(activities, id){
+    let activity = {title: 'Activity not found'};
+    activities.forEach(function(a){
+      if(a.id == id){
+        activity = a;
+      }
+    });
+    return activity;
+  }
   render() {
-    let title = '';
-    if (this.props.activity) {
-      title = this.props.activity.title;
-    }
+    const activity = this._getActivity(this.props.activities, this.props.params.id);
     return (
       <div>
-        <h1>
-          {title}
-        </h1>
+        <h1>{activity.title}</h1>
         <p>
-
+          {activity.description}
         </p>
       </div>
     );
@@ -21,11 +25,8 @@ export class Activity extends Component {
 }
 
 export function search(state) {
-  const id = parseInt(state.router.params.id);
   return {
-    activity: state.activities.filter(function(activity) {
-      return activity.id === id;
-    }).shift()
+    activities: state.activities
   };
 }
 

@@ -8,7 +8,7 @@ import Activity from './components/activity/Activity';
 import Home from './components/home/Home';
 import NotFound from './components/errors/NotFound';
 
-export const namedRoutes = [
+export const menuItems = [
   {route: '/', text: 'Home'},
   {route: '/about', text: 'About'},
   {route: '/activities', text: 'Activities'},
