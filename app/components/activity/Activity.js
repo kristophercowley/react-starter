@@ -2,10 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 export class Activity extends Component {
-  _handleBack(e, context){
-    e.preventDefault();
-    context.props.history.goBack();
-  }
   render() {
     let title = '';
     if (this.props.activity) {
@@ -14,9 +10,6 @@ export class Activity extends Component {
     return (
       <div>
         <h1>
-          <button onClick={e => this._handleBack(e, this)}>
-            Back to Activities
-          </button>
           {title}
         </h1>
         <p>
