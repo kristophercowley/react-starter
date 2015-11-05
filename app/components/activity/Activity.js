@@ -12,7 +12,9 @@ export class Activity extends Component {
     return activity;
   }
   render() {
-    const activity = this._getActivity(this.props.activities, this.props.params.id);
+    const activities = this.props.activities || [];
+    const id = this.props.params ? this.props.params.id : null;
+    const activity = this._getActivity(activities, id);
     return (
       <div>
         <h1>{activity.title}</h1>
