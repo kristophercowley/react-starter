@@ -1,6 +1,6 @@
 import './Nav.scss';
 
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {AppBar, Avatar, Card, CardHeader, LeftNav, IconButton, FontIcon} from 'material-ui';
 import {menuItems} from '../../routes';
@@ -20,42 +20,28 @@ const pathsThatRequireBackButton = [
 ];
 
 export class Nav extends Component {
-  isActive(route) {
-    return route === this.props.location.pathname ? 'active' : '';
-  }
   _getSelectedIndex() {
     if (this.props.location) {
-      for (let i = 0; i < menuItems.length; i++) {
-        if (menuItems[i].route == this.props.location.pathname) {
-          return i;
-        }
-      }
+      return menuItems.map(item => item.route).indexOf(this.props.location.pathname);
     }
   }
-  _onLeftNavChange(e, key, payload) {
-    history.pushState({}, payload.route);
-  }
   _shouldShowBackButton(path){
-    let show = false;
-    pathsThatRequireBackButton.forEach(function(match){
-      if(!show && path.indexOf(match) > -1){
-        show = true;
+    return pathsThatRequireBackButton.some(function(match){
+      if(path.indexOf(match) > -1){
+        return true;
       }
     });
-
-    return show;
   }
   render() {
-    let showBackButton = this._shouldShowBackButton(this.props.location.pathname);
     return (
       <nav>
         <LeftNav ref="leftNav" docked={false}
             header={header}
             menuItems={menuItems}
-            onChange={(e, key, payload) => this._onLeftNavChange(e, key, payload)}
+            onChange={(e, key, payload) => history.pushState({}, payload.route)}
             selectedIndex={this._getSelectedIndex()}/>
         {
-          showBackButton ? (
+          this._shouldShowBackButton(this.props.location.pathname) ? (
             <AppBar
                 iconElementLeft={
                   <IconButton onClick={() => history.goBack()}>
@@ -68,11 +54,14 @@ export class Nav extends Component {
                 onLeftIconButtonTouchTap={() => this.refs.leftNav.toggle()}/>
           )
         }
-
       </nav>
     );
   }
 }
+
+Nav.propTypes = {
+  location: PropTypes.object.isRequired
+};
 
 export default connect(state => {
   return {router: state.router};

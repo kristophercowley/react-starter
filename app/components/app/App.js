@@ -41,6 +41,10 @@ export class App extends Component {
   }
 }
 
+App.propTypes = {
+  location: PropTypes.object.isRequired
+};
+
 App.childContextTypes = {
   muiTheme: PropTypes.object
 };

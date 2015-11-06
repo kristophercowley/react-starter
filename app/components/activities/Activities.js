@@ -1,6 +1,6 @@
 import './Activities.scss';
 
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import {List, ListItem} from 'material-ui';
 import history from '../../history';
@@ -30,6 +30,11 @@ export class Activities extends Component {
     );
   }
 }
+
+Activities.propTypes = {
+  activities: PropTypes.array.isRequired,
+  myActivities: PropTypes.array.isRequired
+};
 
 // State to use
 export function search(state) {

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 
 export class Activity extends Component {
@@ -25,6 +25,10 @@ export class Activity extends Component {
     );
   }
 }
+
+Activity.propTypes = {
+  activities: PropTypes.array.isRequired
+};
 
 export function search(state) {
   return {
