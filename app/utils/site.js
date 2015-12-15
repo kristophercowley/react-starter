@@ -46,3 +46,11 @@ export function setPageTitle(props) {
     props.dispatch(setTitle(title));
   }
 }
+
+export function hideLoadingAnimation(){
+  document.getElementById('spinner').style.display = 'none';
+}
+
+export function showLoadingAnimation(){
+  document.getElementById('spinner').style.display = 'block';
+}

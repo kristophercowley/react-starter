@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
 
 import Nav from '../nav/Nav';
-import {setPageTitle} from '../../utils/site';
+import {setPageTitle, hideLoadingAnimation} from '../../utils/site';
 import MaterialTheme from '../../material-theme';
 //import {fetchActivities, activitiesFetched} from '../../actions/activities';
 
@@ -20,6 +20,7 @@ export class App extends Component {
     //    dispatch(activitiesFetched(activities));
     //  });
     setPageTitle(this.props);
+    hideLoadingAnimation();
   }
   getChildContext() {
     return {
