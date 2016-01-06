@@ -3,32 +3,30 @@ import './App.scss';
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import ThemeManager from 'material-ui/lib/styles/theme-manager';
+import MaterialTheme from '../../material-theme';
 
 import Nav from '../nav/Nav';
-import {setPageTitle, hideLoadingAnimation} from '../../utils/site';
-import MaterialTheme from '../../material-theme';
-//import {fetchActivities, activitiesFetched} from '../../actions/activities';
+import {fetchActivities, activitiesFetched} from '../../actions/activities';
+import {setTitle, isLoading} from '../../actions/site';
 
 export class App extends Component {
-
-  constructor(props) {
-    super(props);
-    // Add initial app data fetch here
-    //let dispatch = this.props.dispatch;
-    //dispatch(fetchActivities())
-    //  .then(function(activities){
-    //    dispatch(activitiesFetched(activities));
-    //  });
-    setPageTitle(this.props);
-    hideLoadingAnimation();
-  }
   getChildContext() {
     return {
       muiTheme: ThemeManager.getMuiTheme(MaterialTheme)
     };
   }
+  componentWillMount() {
+    // Initial data fetch here
+    isLoading(true);
+    let {dispatch} = this.props;
+    dispatch(fetchActivities())
+      .then(function(activities){
+        dispatch(activitiesFetched(activities));
+        isLoading(false);
+      });
+  }
   componentWillReceiveProps(nextProps) {
-    setPageTitle(nextProps);
+    setTitle(nextProps);
   }
   render() {
     return (
@@ -45,7 +43,6 @@ export class App extends Component {
 App.propTypes = {
   location: PropTypes.object.isRequired
 };
-
 App.childContextTypes = {
   muiTheme: PropTypes.object
 };

@@ -27,9 +27,7 @@ export class Nav extends Component {
   }
   _shouldShowBackButton(path){
     return pathsThatRequireBackButton.some(function(match){
-      if(path.indexOf(match) > -1){
-        return true;
-      }
+      return path.indexOf(match) > -1;
     });
   }
   render() {
@@ -63,6 +61,6 @@ Nav.propTypes = {
   location: PropTypes.object.isRequired
 };
 
-export default connect(state => {
-  return {router: state.router};
-})(Nav);
+export default connect(state => ({
+  router: state.router
+}))(Nav);

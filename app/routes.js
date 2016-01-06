@@ -8,6 +8,7 @@ import Activity from './components/activity/Activity';
 import Home from './components/home/Home';
 import NotFound from './components/errors/NotFound';
 
+// Used in Nav. Kept here for clarity to ensure consistency between routes and nav
 export const menuItems = [
   {route: '/', text: 'Home'},
   {route: '/about', text: 'About'},
@@ -26,12 +27,14 @@ export default (
 );
 
 function getActivityTitle(props) {
-  let id       = parseInt(props.params.id);
-  let activity = props.activities.filter(function(activity) {
-    return id === activity.id;
-  }).shift();
-  if (activity) {
-    return activity.title;
+  if(props.activities){
+    const id       = parseInt(props.params.id);
+    const activity = props.activities.filter(function(activity) {
+      return id === activity.id;
+    }).shift();
+    if (activity) {
+      return activity.title;
+    }
+    return `Activity ${props.params.id}`;
   }
-  return `Activity ${props.params.id}`;
 }

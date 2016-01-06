@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux';
-import { routerStateReducer as router } from 'redux-router';
+import { routerStateReducer } from 'redux-router';
 import activities from './activities';
 import myActivities from './myActivities';
 import site from './site';
 
 const rootReducer = combineReducers({
-  router,
+  routerStateReducer,
   activities,
   myActivities,
   site

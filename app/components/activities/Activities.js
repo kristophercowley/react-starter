@@ -1,48 +1,45 @@
 import './Activities.scss';
 
-import React, {Component, PropTypes} from 'react';
+import React from 'react';
+import history from '../../history';
 import {connect} from 'react-redux';
 import {List, ListItem} from 'material-ui';
-import history from '../../history';
+import FontIcon from 'material-ui/lib/font-icon';
 
 // Export here for testing
-export class Activities extends Component {
-  _handleClick(activityId){
-    history.pushState(null, `/activity/${activityId}`);
-  }
-
-  render() {
-    return (
-      <div className="Activities">
-        <h1>Activities</h1>
-        <List>
-        {this.props.activities.map(function(activity, key) {
+let Activities = (props) => {
+  const myActivityIds = props.myActivities.map(function(activity){
+    return activity.id;
+  });
+  return (
+    <div className="Activities">
+      <h1>Activities</h1>
+      <List>
+        {props.activities.map(function(activity, key) {
+          const isActive = myActivityIds.indexOf(activity.id) > -1;
           return (
             <ListItem
                 key={key}
-                onTouchTap={() => this._handleClick(activity.id)}
+                onTouchTap={() => props.selectEvent(activity.id)}
                 primaryText={activity.title}
-                secondaryText={activity.description} />
+                secondaryText={activity.description}
+                rightIcon={isActive ? <FontIcon className="muidocs-icon-action-home" /> : <div/>}
+                />
           );
         }.bind(this))}
-        </List>
-      </div>
-    );
-  }
-}
-
-Activities.propTypes = {
-  activities: PropTypes.array.isRequired,
-  myActivities: PropTypes.array.isRequired
+      </List>
+    </div>
+  );
 };
 
-// State to use
-export function search(state) {
-  return {
+export default connect(
+  state => ({
     activities: state.activities,
     myActivities: state.myActivities
-  };
-}
-
-// Default export connected component
-export default connect(search)(Activities);
+  }),
+  () => ({
+    selectEvent: (activityId) => {
+      history.pushState(null, `/activity/${activityId}`);
+    }
+  })
+)(Activities);

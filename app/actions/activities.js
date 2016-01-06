@@ -1,21 +1,12 @@
-import {
-  ADD_MY_ACTIVITY,
-  REMOVE_MY_ACTIVITY,
-  ACTIVITIES_FETCHED
-} from '../constants/ActionTypes';
-
-export function addMyActivity(id) {
-  return {type: ADD_MY_ACTIVITY, payload: {id}};
-}
-
-export function removeMyActivity(id) {
-  return {type: REMOVE_MY_ACTIVITY, payload: {id}};
+export function toggleActivity(id) {
+  // Adds it to state which is synced to local storage
+  return {type: 'TOGGLE_ACTIVITY', id};
 }
 
 export function fetchActivities() {
   return function() {
     return new Promise(function(resolve) {
-      var activities = [
+      const activities = [
         {
           id: 1,
           title: 'Soccer',
@@ -24,6 +15,14 @@ export function fetchActivities() {
           id: 2,
           title: 'Football',
           description: 'Booooring'
+        }, {
+          id: 3,
+          title: 'Volleyball',
+          description: 'Yuck'
+        }, {
+          id: 4,
+          title: 'Hockey',
+          description: 'Fight!!'
         }
       ];
       resolve(activities);
@@ -31,5 +30,5 @@ export function fetchActivities() {
   };
 }
 export function activitiesFetched(activities) {
-  return {type: ACTIVITIES_FETCHED, payload: {activities: activities}};
+  return {type: 'ACTIVITIES_FETCHED', activities};
 }

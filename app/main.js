@@ -14,7 +14,7 @@ import rootReducer from './reducers';
 // TODO: Remove with React 1.0. Used for Material-UI tap events
 injectTapEventPlugin();
 
-let store = compose(
+const store = compose(
   applyMiddleware(thunk),
   autoRehydrate()
 )(createStore)(rootReducer);

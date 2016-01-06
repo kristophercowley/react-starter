@@ -1,12 +1,10 @@
-import { SET_TITLE } from '../constants/ActionTypes';
-
-export default function(state = {}, action) {
+export default function(state = {loading: true}, action) {
+  //console.log(action.type);
   switch (action.type) {
-    case SET_TITLE:
-      let title      = action.payload.title;
-      document.title = `App | ${title}`;
-      return {title};
-
+    case 'SET_TITLE':
+      return Object.assign({}, state, {title: action.title});
+    case 'IS_LOADING':
+      return Object.assign({}, state, {loading: action.loading});
     default:
       return state;
   }
