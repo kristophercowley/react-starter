@@ -13,7 +13,7 @@ del('./dist/*.js');
 var config = {
   devtool: 'source-map',
   entry: {
-    app: './app/main.js',
+    app: './app/index.js',
     vendors: ['react']
   },
   output: {

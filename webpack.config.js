@@ -13,7 +13,7 @@ del('./build/*.js');
 var config = {
   devtool: 'source-map',
   entry: {
-    app: ['./app/main.js'],
+    app: ['./app/index.js'],
     vendors: ['react', 'react-dom', 'react-router']
   },
   output: {
@@ -32,7 +32,7 @@ var config = {
   },
   plugins: [
     // Create vendors bundle
-    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js'),
+    new webpack.optimize.CommonsChunkPlugin('vendors', 'vendors.js')
   ],
   node: {
     fs: 'empty' // for tape

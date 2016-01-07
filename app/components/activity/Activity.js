@@ -5,18 +5,24 @@ import {connect} from 'react-redux';
 import IconButton from 'material-ui/lib/icon-button';
 import ActionGrade from 'material-ui/lib/svg-icons/action/grade';
 
-import {toggleActivity} from '../../actions/activities';
-
 let Activity = (props) => {
   const id = props.params ? props.params.id : null;
   const activity = props.activities.find(function(activity) {
     return activity.id == id;
   }) || {title: 'Activity not found'};
+  const isActive = props.myActivities.indexOf(id) > -1;
+  console.log(isActive, props.myActivities, id);
+  let color;
+  if(isActive){
+    color =  '#F1632A';
+  } else {
+    color = '#B7B7B7';
+  }
   return (
     <div>
       <h1>
-        <IconButton onClick={() => props.saveEvent(id)} >
-          <ActionGrade />
+        <IconButton onClick={() => props.saveEvent(id)} className="align-icon-left" >
+          <ActionGrade color={color} />
         </IconButton>
         {activity.title}
       </h1>
@@ -33,11 +39,12 @@ Activity.propTypes = {
 
 export default connect(
   state => ({
-    activities: state.activities
+    activities: state.activities,
+    myActivities: state.myActivities
   }),
   dispatch => ({
-    saveEvent: (activityId) => {
-      dispatch(toggleActivity(activityId));
+    saveEvent: (id) => {
+      dispatch({type: 'TOGGLE_ACTIVITY', id});
     }
   })
 )(Activity);

@@ -22,12 +22,8 @@ const store = compose(
 persistStore(store);
 
 render(
-  <div>
-    <Provider store={store}>
-      <Router history={history}>
-        {routes}
-      </Router>
-    </Provider>
-  </div>,
+  <Provider store={store}>
+    <Router history={history} routes={routes} />
+  </Provider>,
   document.getElementById('app')
 );

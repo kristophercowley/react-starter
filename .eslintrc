@@ -1,4 +1,13 @@
 {
+  "ecmaFeatures": {
+    "jsx": true,
+    "modules": true,
+    "experimentalObjectRestSpread": true
+  },
+  "env": {
+    "browser": true,
+    "node": true
+  },
   "parser": "babel-eslint",
   "rules": {
     "indent": [2, 2, {"SwitchCase": 1}],
@@ -26,16 +35,9 @@
     "react/sort-comp": 1,
     "react/wrap-multilines": 1
   },
-  "env": {
-    "es6": true,
-    "browser": true
-  },
   "extends": "eslint:recommended",
-  "ecmaFeatures": {
-    "jsx": true,
-    "experimentalObjectRestSpread": true
-  },
   "plugins": [
+    "babel",
     "react"
   ]
 }

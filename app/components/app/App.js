@@ -22,7 +22,7 @@ export class App extends Component {
     dispatch(fetchActivities())
       .then(function(activities){
         dispatch(activitiesFetched(activities));
-        isLoading(false);
+        dispatch(isLoading(false));
       });
   }
   componentWillReceiveProps(nextProps) {

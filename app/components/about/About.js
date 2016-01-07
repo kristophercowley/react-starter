@@ -1,7 +1,8 @@
-import './About.scss';
 import React from 'react';
+import './About.scss';
 
-export default () => {
+export default function About() {
+  console.log('about');
   return (
     <div>
       <h1>About</h1>
@@ -13,4 +14,4 @@ export default () => {
       </p>
     </div>
   );
-};
+}
