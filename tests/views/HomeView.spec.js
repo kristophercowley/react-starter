@@ -2,12 +2,9 @@ import {expect} from 'chai';
 import {shallow} from 'enzyme';
 import React from 'react';
 
-import {HomeView} from '../../src/views/HomeView';
+import HomeView from '../../src/views/HomeView';
 
-const props = {
-  goTo: () => {},
-  location: {}
-};
+const props = {};
 
 describe('(View) HomeView', function() {
   const wrapper = shallow(<HomeView {...props} />);

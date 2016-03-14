@@ -2,7 +2,7 @@ import {expect} from 'chai';
 import {shallow} from 'enzyme';
 import React from 'react';
 
-import {NotFoundView} from '../../src/views/NotFoundView';
+import NotFoundView from '../../src/views/NotFoundView';
 
 const props = {};
 

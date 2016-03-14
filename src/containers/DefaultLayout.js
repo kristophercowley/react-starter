@@ -17,7 +17,6 @@ export class DefaultLayout extends Component {
   static propTypes = {
     children: PropTypes.element,
     loading: PropTypes.bool,
-    requiresEvents: PropTypes.bool,
     pathname: PropTypes.string.isRequired,
     title: PropTypes.string.isRequired,
     error: PropTypes.shape({
@@ -58,9 +57,9 @@ export class DefaultLayout extends Component {
   render () {
     const {children, history} = this.props;
     // Error and loading props
-    let {error, loading, requiresEvents} = this.props;
-    error = requiresEvents && error && error.failed === true ? <Error message={error.message} /> : null;
-    loading = requiresEvents && loading === true ? <Spinner /> : null;
+    let {error, loading} = this.props;
+    error = error && error.failed === true ? <Error message={error.message} /> : null;
+    loading = loading === true ? <Spinner /> : null;
     // Nav props
     const {pathname, title, rightNav, leftNav = {title: 'Home', path: '/'}, goBack} = this.props;
     // Transition props
