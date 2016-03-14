@@ -1,0 +1,78 @@
+@import "variables";
+@import "mixins";
+
+body {
+  fill: currentColor; // for svg fill
+  color: $grey;
+}
+
+svg {
+  fill: currentColor;
+}
+
+a {
+  text-decoration: none;
+}
+h1 {
+  color: $blue;
+  font-size: 38px;
+  margin-bottom: 25px;
+}
+h4 {
+  color: $darkBlue;
+  padding-bottom: 5px;
+  margin-bottom: 15px;
+  text-transform: uppercase;
+  border-bottom: 1px solid $grey-100;
+}
+.clickable {
+  cursor: pointer;
+}
+.clear {
+  clear: both;
+}
+.no-underline {
+  &, a, a:hover, a:active {
+    text-decoration: none;
+  }
+}
+
+input.form-control {
+  background-color: $lightGrey;
+  padding: 15px!important;
+  border-bottom: 1px solid $grey-100!important;
+  &:focus, &:active {
+    border-bottom: none!important;
+  }
+}
+input[placeholder].form-control {
+  @include placeholder($grey-600);
+}
+.button {
+  text-align: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  color: $white;
+  background-color: darken($grey, 15%);
+  border-radius: 19px;
+  margin: 0 6px;
+  padding: 5px;
+}
+input.form-control {
+  padding: 13px!important;
+  height: 45px;
+}
+.desktop-only, .mobile-only {
+  display: none;
+}
+@media (min-width: $desktopMin) {
+  .desktop-only {
+    display: block;
+  }
+}
+@media (max-width: $mobileMax){
+  .mobile-only {
+    display: block;
+  }
+}

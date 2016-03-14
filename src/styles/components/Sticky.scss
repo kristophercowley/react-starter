@@ -1,0 +1,27 @@
+@import "../variables";
+
+$mobileHeight: 60px;
+$desktopHeight: 80px;
+
+.not-ie {
+  .sticky-hidden {
+    transform: translate(0, -60px);
+    transition: transform .2s, background .3s, color .3s, opacity .3s;
+  }
+  .sticky-visible {
+    transition: transform .3s, background .4s, opacity .3s;
+    transform: translate(0,0);
+  }
+}
+.sticky-visible {
+  width: 100%;
+  height: $mobileHeight;
+  position: fixed;
+  top: 0;
+  z-index: 99999;
+  background: darken($lightGrey, 1%);
+  opacity: 1;
+  @media (min-width: $tabletWidth){
+    height: $desktopHeight;
+  }
+}

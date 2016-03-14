@@ -1,0 +1,31 @@
+@import "../variables";
+
+header {
+  .header {
+    height: 100px;
+    z-index: 10;
+    width: 100%;
+    min-height: 100px;
+    background-color: $darkestBlue;
+    box-shadow: 0px -1px 9px 1px $darkGrey;
+    .logo {
+      margin: 0 auto;
+      width: 250px;
+      cursor: pointer;
+      padding: 15px;
+    }
+  }
+  .mobile-header {
+    z-index: 10;
+    width: 100%;
+    height: 80px;
+    background-color: $orange;
+    box-shadow: 0px -1px 9px 1px $darkGrey;
+    overflow: hidden;
+    img {
+      height: 80px;
+      width: auto;
+      cursor: pointer;
+    }
+  }
+}

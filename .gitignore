@@ -1,0 +1,9 @@
+.DS_STORE
+node_modules
+jspm_packages
+npm-debug.log*
+
+dist
+.idea
+*.sublime-workspace
+jsconfig.json

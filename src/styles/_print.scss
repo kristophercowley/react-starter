@@ -1,0 +1,12 @@
+@media print {
+  * {
+    font-size: 14px!important;
+  }
+  .btn {
+    display: none!important;
+  }
+  h1 {
+    font-size: 32px!important;
+  }
+  a:link:after, a:visited:after { content:''; }
+}

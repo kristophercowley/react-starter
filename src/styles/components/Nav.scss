@@ -1,0 +1,112 @@
+@import "../variables";
+
+$mobileHeight: 60px;
+$desktopHeight: 80px;
+
+nav {
+  width: 100%;
+  background-color: darken($lightGrey, 1%);
+  border-bottom: 2px solid darken($lightGrey, 6%);
+  margin-bottom: 25px;
+  &.mobile {
+    height: $mobileHeight;
+    a {
+      text-decoration: none;
+    }
+    .title {
+      float: left;
+      margin: 0 auto;
+      width: 46%;
+      height: 60px;
+      h1 {
+        height: 1em;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        text-align: center;
+        font-size: 28px;
+        margin-top: 15px;
+      }
+    }
+    h1.home {
+      text-align: center;
+      font-size: 28px;
+      margin: 0 auto;
+      padding-top: 15px;
+    }
+    .left, .right {
+      width: 27%;
+      float: left;
+      padding: 20px 0;
+      font-size: 16px;
+      line-height: 1.2em;
+      color: lighten($darkGrey, 20%);
+      font-weight: 800;
+      @media (max-width: $smallPhoneWidth){
+        font-size: 15px;
+      }
+    }
+    .left {
+      text-align: left;
+      padding-left: 25px;
+    }
+    .right {
+      text-align: right;
+      padding-right: 25px;
+    }
+    @media (max-width: $smallPhoneWidth) {
+      .left {
+        padding-left: 7px;
+      }
+      .right {
+        padding-right: 7px;
+      }
+    }
+  }
+  &.desktop {
+    $itemWidth: 190px;
+    $itemsPadding: 15px;
+    height: $desktopHeight;
+    .items {
+      height: $desktopHeight;
+      width: $itemWidth * 4;
+      margin: 0 auto;
+      padding: $itemsPadding 0;
+    }
+    .item {
+      cursor: pointer;
+      float: left;
+      height: $desktopHeight - ($itemsPadding * 2);
+      width: $itemWidth;
+      font-size: 18px;
+      text-transform: uppercase;
+      font-family: $headerFontFamily;
+      padding: 8px 0;
+      text-align: center;
+      border-right: 1px solid $grey-100;
+      color: $grey-500;
+      &:hover {
+        color: $grey-700;
+      }
+      svg {
+        width: 24px;
+        height: 24px;
+        position: relative;
+        bottom: 2px;
+        right: 5px;
+      }
+      &:last-of-type {
+        border-right: none;
+      }
+      &.active {
+        color: $darkBlue;
+        &:hover {
+          color: darken($darkBlue, 5%);
+        }
+      }
+    }
+  }
+}
+.sticky {
+  z-index: 9999!important;
+}
