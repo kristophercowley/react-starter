@@ -1,9 +1,3 @@
-Bronco Day App
-=======================
+# React Starter
 
-To start app, run the following
-
-    npm install
-    npm run start
-
-You can then load the app at `http://localhost:3000`
+A react starter to help me quick start projects with React and Webpack. More or less for personal use but if you find it useful PRs are welcome.
