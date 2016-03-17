@@ -1,7 +1,6 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import { browserHistory } from 'react-router';
-import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import {StickyContainer} from 'react-sticky';
 
 import '../styles/core.scss';
@@ -63,8 +62,6 @@ export class DefaultLayout extends Component {
     loading = loading === true ? <Spinner /> : null;
     // Nav props
     const {pathname, title, rightNav, leftNav = {title: 'Home', path: '/'}, goBack} = this.props;
-    // Transition props
-    const {transitionName = 'fade', transitionEnterTimeout = 500, transitionLeaveTimeout = 500} = this.props;
     return (
       <StickyContainer>
         <div className="Layout">
@@ -77,15 +74,9 @@ export class DefaultLayout extends Component {
           <div className="container">
             <div className="row">
               <div className="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-                <ReactCSSTransitionGroup
-                  component="div"
-                  transitionName={transitionName}
-                  transitionEnterTimeout={transitionEnterTimeout}
-                  transitionLeaveTimeout={transitionLeaveTimeout}>
-                  <div className={pathname}>
-                    {error || loading || children}
-                  </div>
-                </ReactCSSTransitionGroup>
+                <div className={pathname}>
+                  {error || loading || children}
+                </div>
               </div>
             </div>
           </div>

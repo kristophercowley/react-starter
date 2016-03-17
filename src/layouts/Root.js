@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 import DocumentTitle from 'react-document-title';
 import { connect, Provider } from 'react-redux';
 import { Router } from 'react-router';
@@ -45,7 +46,14 @@ export class Root extends React.Component {
       <DocumentTitle title={`${appTitle}${title}`}>
         <Provider store={store}>
           <div style={{ height: '100%' }}>
-            <Router history={history} routes={routes}/>
+            <ReactCSSTransitionGroup
+              transitionName="fade"
+              transitionEnterTimeout={500}
+              transitionLeaveTimeout={300}>
+              <div key={title}>
+                <Router history={history} routes={routes}/>
+              </div>
+            </ReactCSSTransitionGroup>
           </div>
         </Provider>
       </DocumentTitle>
