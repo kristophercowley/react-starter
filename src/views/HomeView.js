@@ -1,7 +1,7 @@
 import React from 'react';
 
 import '../styles/views/HomeView.scss';
-import HomeLayout from '../containers/HomeLayout';
+import HomeLayout from '../layouts/HomeLayout';
 
 export default function(props) {
   return (

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DefaultLayout from '../containers/DefaultLayout';
+import DefaultLayout from '../layouts/DefaultLayout';
 
 export default function(props) {
   return (

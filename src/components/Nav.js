@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 import MediaQuery from 'react-responsive';
 import {Link} from 'react-router';
-import {StickyContainer, Sticky} from 'react-sticky';
+import {Sticky} from 'react-sticky';
 import classnames from 'classnames';
 import {Home, Search} from 'react-md-icons';
 
@@ -61,29 +61,27 @@ export default class extends Component {
   render(){
     const {leftNav, rightNav, title} = this.props;
     return (
-      <StickyContainer>
-        <Sticky>
-          <div>
-            <MediaQuery query={`(min-width: ${TABLET_MIN})`}>
-              <nav className="Nav desktop">
-                <div className="items no-underline">
-                  {this.renderDesktopLink('Home', Home, '/')}
-                  {this.renderDesktopLink('404', Search, 'badLink')}
-                </div>
-              </nav>
-            </MediaQuery>
-            <MediaQuery query={`(max-width: ${PHONE_MAX})`}>
-              <nav className="Nav mobile">
-                {this.renderMobileLink(leftNav, 'left')}
-                <div className="title">
-                  <h1>{title}</h1>
-                </div>
-                {this.renderMobileLink(rightNav, 'right')}
-              </nav>
-            </MediaQuery>
-          </div>
-        </Sticky>
-      </StickyContainer>
+      <Sticky>
+        <div>
+          <MediaQuery query={`(min-width: ${TABLET_MIN})`}>
+            <nav className="Nav desktop">
+              <div className="items no-underline">
+                {this.renderDesktopLink('Home', Home, '/')}
+                {this.renderDesktopLink('404', Search, 'badLink')}
+              </div>
+            </nav>
+          </MediaQuery>
+          <MediaQuery query={`(max-width: ${PHONE_MAX})`}>
+            <nav className="Nav mobile">
+              {this.renderMobileLink(leftNav, 'left')}
+              <div className="title">
+                <h1>{title}</h1>
+              </div>
+              {this.renderMobileLink(rightNav, 'right')}
+            </nav>
+          </MediaQuery>
+        </div>
+      </Sticky>
     );
   }
 }

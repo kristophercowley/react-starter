@@ -2,6 +2,7 @@ import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
 import { browserHistory } from 'react-router';
 import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
+import {StickyContainer} from 'react-sticky';
 
 import '../styles/core.scss';
 import '../styles/transitions.scss';
@@ -65,30 +66,32 @@ export class DefaultLayout extends Component {
     // Transition props
     const {transitionName = 'fade', transitionEnterTimeout = 500, transitionLeaveTimeout = 500} = this.props;
     return (
-      <div className="Layout">
-        <Header push={history.push} />
-        <Nav currentPath={pathname}
-             title={title}
-             rightNav={rightNav}
-             leftNav={leftNav}
-             goBack={goBack} />
-        <div className="container">
-          <div className="row">
-            <div className="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-              <ReactCSSTransitionGroup
-                component="div"
-                transitionName={transitionName}
-                transitionEnterTimeout={transitionEnterTimeout}
-                transitionLeaveTimeout={transitionLeaveTimeout}>
-                <div className={pathname}>
-                  {error || loading || children}
-                </div>
-              </ReactCSSTransitionGroup>
+      <StickyContainer>
+        <div className="Layout">
+          <Header push={history.push} />
+          <Nav currentPath={pathname}
+               title={title}
+               rightNav={rightNav}
+               leftNav={leftNav}
+               goBack={goBack} />
+          <div className="container">
+            <div className="row">
+              <div className="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+                <ReactCSSTransitionGroup
+                  component="div"
+                  transitionName={transitionName}
+                  transitionEnterTimeout={transitionEnterTimeout}
+                  transitionLeaveTimeout={transitionLeaveTimeout}>
+                  <div className={pathname}>
+                    {error || loading || children}
+                  </div>
+                </ReactCSSTransitionGroup>
+              </div>
             </div>
           </div>
+          <Footer />
         </div>
-        <Footer />
-      </div>
+      </StickyContainer>
     );
   }
 }

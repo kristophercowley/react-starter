@@ -5,7 +5,7 @@ import {browserHistory} from 'react-router';
 
 import routes from './routes';
 import configureStore from './store';
-import Root from './containers/Root';
+import Root from './layouts/Root';
 import {isBrowserModern} from './utilities/browser';
 import './utilities/perf';
 import {trackPageViews} from './utilities/tracking';
