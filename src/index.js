@@ -1,32 +1,30 @@
 import 'babel-polyfill';
 import React from 'react';
 import {render} from 'react-dom';
-import {browserHistory} from 'react-router';
+import { Router, browserHistory } from 'react-router';
+import { syncHistoryWithStore } from 'react-router-redux';
+import {Provider} from 'react-redux';
 
+import './utilities/perf';
+import {isBrowserModern} from './utilities/browser';
+import {trackPageViews} from './utilities/tracking';
 import routes from './routes';
 import configureStore from './store';
-import Root from './layouts/Root';
-import {isBrowserModern} from './utilities/browser';
-import './utilities/perf';
-import {trackPageViews} from './utilities/tracking';
 
 trackPageViews();
 
 if (isBrowserModern()) {
-  const props = {
-    history: browserHistory,
-    routes:  routes,
-    store:   configureStore()
-  };
+  const store = configureStore();
+  const history = syncHistoryWithStore(browserHistory, store);
   render(
-    <Root {...props} />,
+    <Provider store={store}>
+      <Router routes={routes} history={history} />
+    </Provider>,
     document.getElementById('root')
   );
 } else {
-  // Set error message for users with unsupported browsers
-  const errorMessage = `
+  document.body.innerHTML = `
     <h1>Browser not supported</h1>
     Please try again using a modern browser such as <a href="https://www.google.com/chrome/browser/desktop/index.html">Chrome</a> or <a href="https://www.mozilla.org/en-US/firefox/new/">Firefox</a>.
   `;
-  document.body.innerHTML = errorMessage;
 }

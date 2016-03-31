@@ -1,9 +1,18 @@
 @import "variables";
 @import "mixins";
 
+html, body {
+  height: 100%;
+}
+
 body {
   fill: currentColor; // for svg fill
   color: $grey;
+}
+
+img {
+  line-height: 2;
+  display: block;
 }
 
 svg {
@@ -13,6 +22,13 @@ svg {
 a {
   text-decoration: none;
 }
+
+p {
+  font-size: 16px;
+  color: $grey-700;
+  line-height: 1.5em;
+}
+
 h1 {
   color: $blue;
   font-size: 38px;
@@ -25,21 +41,41 @@ h4 {
   text-transform: uppercase;
   border-bottom: 1px solid $grey-100;
 }
-.container {
-  margin-top: 25px;
-}
 .clickable {
   cursor: pointer;
+}
+.half {
+  width: 50%;
+  float: left;
+  margin-bottom: 25px;
 }
 .clear {
   clear: both;
 }
+
 .no-underline {
   &, a, a:hover, a:active {
     text-decoration: none;
   }
 }
+.bronco-content .row {
+  margin-left: 0;
+  margin-right: 0;
 
+}
+.ReactModal__Content {
+  width: 95% !important;
+  max-width: 600px !important;
+  border-radius: 15px!important;
+}
+.container {
+  margin-top: 25px;
+}
+@media (min-width: $tabletWidth) {
+  .mobile {
+    display: none;
+  }
+}
 input.form-control {
   background-color: $lightGrey;
   padding: 15px!important;
@@ -66,7 +102,7 @@ input.form-control {
   padding: 13px!important;
   height: 45px;
 }
-.desktop-only, .mobile-only {
+.desktop-only, .mobile-only, .print-only {
   display: none;
 }
 @media (min-width: $desktopMin) {

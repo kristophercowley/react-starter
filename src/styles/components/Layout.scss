@@ -1,1 +1,13 @@
+@import "../core";
 @import "../variables";
+
+.Layout {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  .container {
+    flex: 1;
+    margin-bottom: 50px;
+  }
+}
+

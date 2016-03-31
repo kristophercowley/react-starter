@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import setLoading from '../../src/actions/loading_set';
+import {setLoading} from '../../src/actions/loading';
 import {SET_LOADING} from '../../src/constants/ActionTypes';
 
 describe('(Action) Set Loading', function() {
@@ -8,7 +8,7 @@ describe('(Action) Set Loading', function() {
     const loading = false;
     const expected = {
       type: SET_LOADING,
-      loading
+            loading
     };
     const action = setLoading(loading);
     expect(action).to.eql(expected);
@@ -17,7 +17,7 @@ describe('(Action) Set Loading', function() {
     const loading = true;
     const expected = {
       type: SET_LOADING,
-      loading
+            loading
     };
     const action = setLoading(loading);
     expect(action).to.eql(expected);

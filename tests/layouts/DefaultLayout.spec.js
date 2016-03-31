@@ -2,7 +2,7 @@ import React from 'react';
 import {expect} from 'chai';
 import {render} from 'enzyme';
 
-import {DefaultLayout} from '../../src/containers/DefaultLayout';
+import {DefaultLayout} from '../../src/layouts/DefaultLayout';
 
 const props = {
   children: <div className="child"></div>,

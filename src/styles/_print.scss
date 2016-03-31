@@ -2,10 +2,13 @@
   * {
     font-size: 14px!important;
   }
-  .btn {
+  .print-only {
+    display: block!important;
+  }
+  .Nav, header, footer, .btn, .times .duration, .back-button {
     display: none!important;
   }
-  h1 {
+  h1, .title {
     font-size: 32px!important;
   }
   a:link:after, a:visited:after { content:''; }

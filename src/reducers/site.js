@@ -4,7 +4,8 @@ const defaultState = {
   dataError: false,
   dataErrorMessage: '',
   loading: true,
-  title: ''
+  title: '',
+  hasReadInstructions: false
 };
 
 export default function (state = defaultState, action = {}) {

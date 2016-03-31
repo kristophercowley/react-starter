@@ -6,11 +6,12 @@ var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 var OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 var autoprefixer = require('autoprefixer');
+var ExtractTextPlugin = require("extract-text-webpack-plugin")
 
 module.exports = {
   debug: true,
-  devtool: '#source-map',
-  noInfo: true, //set to false to see a list of every file being bundled.
+  devtool: 'source-map',
+  noInfo: true,
   entry: [
     'babel-polyfill',
     './src/index'
@@ -27,16 +28,18 @@ module.exports = {
         NODE_ENV: JSON.stringify("production")
       }
     }),
+    new webpack.optimize.OccurenceOrderPlugin(),
+    new webpack.NoErrorsPlugin(),
     new CleanWebpackPlugin(['dist'], {root: __dirname, verbose: false, dry: false}),
+    new CopyWebpackPlugin([{from: './src/resources/static', to: './' }]),
     new webpack.ProvidePlugin({
       fetch: 'imports?this=>global!exports?global.fetch!whatwg-fetch'
     }),
-    new webpack.optimize.OccurenceOrderPlugin(),
     new webpack.optimize.DedupePlugin(),
-    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/),
-    new webpack.optimize.UglifyJsPlugin({minimize: true, comments: false}),
-    new OptimizeCssAssetsPlugin({cssProcessorOptions: { discardComments: {removeAll: true } }}),
+    new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /en/), // Remove unused locales in momentjs
     new purify({basePath: __dirname, paths: ["src/*.html", "src/*.js", "src/**/*.js"]}),
+    new OptimizeCssAssetsPlugin({cssProcessorOptions: { discardComments: {removeAll: true } }}),
+    new webpack.optimize.UglifyJsPlugin({}),
     new HtmlWebpackPlugin({
       template: path.join(__dirname, 'src/index.html'),
       hash: false,
@@ -46,11 +49,9 @@ module.exports = {
         collapseWhitespace: true,
         removeComments: true
       },
-      baseHref: '/',
-      title: 'App Title',
-      description: 'App description'
-    }),
-    new CopyWebpackPlugin([{from: './src/resources/static', to: './' }])
+      baseHref: '/broncoday/',
+      title: 'App Title'
+    })
   ],
   module: {
     loaders: [
@@ -65,7 +66,7 @@ module.exports = {
         loaders: ['style', 'css', 'sass', 'postcss']
       },
       {
-        test: /(\.png|\.jpeg?|\.gif|\.svg)/,
+        test: /(\.png|\.jpeg|\.jpg|\.gif|\.svg)/,
         include: path.join(__dirname, 'src'),
         loaders: [
           'file?name=./images/[name].[ext]',

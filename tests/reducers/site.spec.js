@@ -1,9 +1,9 @@
 import {expect} from 'chai';
 
 import siteReducer from '../../src/reducers/site';
-import setLoading from '../../src/actions/loading_set';
-import setTitle from '../../src/actions/title_set';
-import errorFetchingData from '../../src/actions/data_error';
+import {setLoading} from '../../src/actions/loading';
+import {setTitle} from '../../src/actions/title';
+import {errorFetchingData} from '../../src/actions/data';
 
 describe('(Reducer) Site', function() {
   describe('Set title', function(){

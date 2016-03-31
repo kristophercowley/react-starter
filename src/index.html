@@ -1,69 +1,29 @@
 <!doctype html>
 <html lang="en" class="loading">
 <head>
-  <title><%= htmlWebpackPlugin.options.title || '' %></title>
-  <base href="<%= htmlWebpackPlugin.options.baseHref  || '/' %>" />
+  <title><%= htmlWebpackPlugin.options.title %></title>
+  <base href="<%= htmlWebpackPlugin.options.baseHref %>" />
   <meta charset="utf-8">
   <link rel="icon" type="image/png" href="./favicon.ico">
   <link rel="manifest" href="./manifest.json">
-  <meta name="description" content="<%= htmlWebpackPlugin.options.description || '' %>">
+  <meta name="description" content="Site Description.">
   <meta name="viewport" content="initial-scale=1.0, width=device-width">
+  <meta name="Pragma" content="no-cache">
   <!-- Add to homescreen for Chrome on Android -->
   <meta name="mobile-web-app-capable" content="yes">
+
   <!-- Add to homescreen for Safari on iOS -->
   <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="<%= htmlWebpackPlugin.options.title || '' %>">
-  <!--Touch icons-->
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="<%= htmlWebpackPlugin.options.title %>">
+
   <link rel="apple-touch-icon" href="./images/iOS_29px.png">
   <link rel="apple-touch-icon" sizes="72x72" href="./images/iOS_72px_iPad.png">
   <link rel="apple-touch-icon" sizes="120x120" href="./images/iOS_114px_iPhone.png">
   <link rel="apple-touch-icon" sizes="144x144" href="./images/iOS_144px_iPad.png">
 
-  <!-- iPad retina portrait startup image -->
-  <link href="./images/iOS_1536x2008-startup.png"
-        media="(device-width: 768px) and (device-height: 1024px)
-                 and (-webkit-device-pixel-ratio: 2)
-                 and (orientation: portrait)"
-        rel="apple-touch-startup-image">
-  <!-- iPad retina landscape startup image -->
-  <link href="./images/iOS_1496x2048-startup.png"
-        media="(device-width: 768px) and (device-height: 1024px)
-                 and (-webkit-device-pixel-ratio: 2)
-                 and (orientation: landscape)"
-        rel="apple-touch-startup-image">
-  <!-- iPhone 6 Plus portrait startup image -->
-  <link href="./images/iOS_1242x2148-startup.png"
-        media="(device-width: 414px) and (device-height: 736px)
-                 and (-webkit-device-pixel-ratio: 3)
-                 and (orientation: portrait)"
-        rel="apple-touch-startup-image">
-  <!-- iPhone 6 Plus landscape startup image -->
-  <link href="./images/iOS_1182x2208-startup.png"
-        media="(device-width: 414px) and (device-height: 736px)
-                 and (-webkit-device-pixel-ratio: 3)
-                 and (orientation: landscape)"
-        rel="apple-touch-startup-image">
-  <!-- iPhone 6 startup image -->
-  <link href="./images/iOS_750x1294-startup.png"
-        media="(device-width: 375px) and (device-height: 667px)
-                 and (-webkit-device-pixel-ratio: 2)"
-        rel="apple-touch-startup-image">
-  <!-- iPhone 5 startup image -->
-  <link href="./images/iOS_640x1096-startup.png"
-        media="(device-width: 320px) and (device-height: 568px)
-                 and (-webkit-device-pixel-ratio: 2)"
-        rel="apple-touch-startup-image">
-  <!-- iPhone < 5 retina startup image -->
-  <link href="./images/iOS_640x920-startup.png"
-        media="(device-width: 320px) and (device-height: 480px)
-                 and (-webkit-device-pixel-ratio: 2)"
-        rel="apple-touch-startup-image">
-  <!-- iPhone < 5 non-retina startup image -->
-  <link href="./images/iOS_320x460-startup.png"
-        media="(device-width: 320px) and (device-height: 480px)
-                 and (-webkit-device-pixel-ratio: 1)"
-        rel="apple-touch-startup-image">
+  <!-- Tile color for Windows -->
+  <meta name="msapplication-TileColor" content="#000">
   <!--Fonts-->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Oswald:400,700" />

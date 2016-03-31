@@ -1,14 +1,14 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import '../styles/views/HomeView.scss';
-import HomeLayout from '../layouts/HomeLayout';
+import DefaultLayout from '../layouts/DefaultLayout';
 
-export default function(props) {
-  return (
-    <HomeLayout {...props}>
-      <div className="HomeView">
+export default class extends Component {
+  render(){
+    return (
+      <DefaultLayout wrapClass="HomeView" {...this.props}>
         <h1>Home</h1>
-      </div>
-    </HomeLayout>
-  );
+      </DefaultLayout>
+    );
+  }
 }

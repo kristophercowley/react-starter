@@ -1,16 +1,27 @@
 import {browserHistory} from 'react-router';
 import {TRACKING_ID} from '../constants/Google';
 
-// We only want to use when in production. Otherwise mock.
+// react-ga binds to `window` so we need to mock when testing
 let ga = require('react-ga');
-if(process.env.NODE_ENV !== 'production'){
-  const noop = () => {};
-  ga = {initialize: noop, pageview: noop};
+if(process.env.NODE_ENV === 'test'){
+  ga = {
+    initialize: () => {},
+    event: () => {}
+  };
 }
+
 ga.initialize(TRACKING_ID);
 
 export function trackPageViews(){
   browserHistory.listen(location => {
     ga.pageview(location.pathname);
+  });
+}
+
+export function trackClick(title){
+  ga.event({
+    category: 'Actions',
+    action: 'Clicked',
+    label: `Click: ${title}`
   });
 }

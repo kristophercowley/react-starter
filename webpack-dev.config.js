@@ -50,7 +50,7 @@ module.exports = {
         loaders: ["style", "css", "sass"]
       },
       {
-        test: /(\.png|\.jpeg?|\.gif|\.svg)/,
+        test: /(\.png|\.jpeg|\.jpg|\.gif|\.svg)/,
         include: path.join(__dirname, 'src'),
         loaders: [
           'file?name=./images/[name].[ext]'

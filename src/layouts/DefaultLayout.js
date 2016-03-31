@@ -1,49 +1,35 @@
 import React, {Component, PropTypes} from 'react';
 import {connect} from 'react-redux';
-import { browserHistory } from 'react-router';
-import {StickyContainer} from 'react-sticky';
+import classnames from 'classnames';
+import {browserHistory} from 'react-router';
 
-import '../styles/core.scss';
-import '../styles/transitions.scss';
 import '../styles/components/Layout.scss';
-import setTitle from '../actions/title_set';
+import {setTitle} from '../actions/title';
+import {trackClick} from '../utilities/tracking';
 import Error from '../components/Error';
 import Spinner from '../components/Spinner';
-import Header from '../components/Header';
-import Nav from '../components/Nav';
-import Footer from '../components/Footer';
 
 export class DefaultLayout extends Component {
   static propTypes = {
-    children: PropTypes.element,
+    children: PropTypes.any,
     loading: PropTypes.bool,
-    pathname: PropTypes.string.isRequired,
-    title: PropTypes.string.isRequired,
+    title: PropTypes.string,
     error: PropTypes.shape({
       failed: PropTypes.obj,
       message: PropTypes.string
     }),
-    history: PropTypes.shape({
-      goBack: PropTypes.func.isRequired,
-      push: PropTypes.func.isRequired
-    }).isRequired,
-    rightNav: PropTypes.shape({
-      title: PropTypes.string,
-      action: PropTypes.func,
-      path: PropTypes.string
-    }),
-    leftNav: PropTypes.shape({
-      title: PropTypes.string,
-      action: PropTypes.func,
-      path: PropTypes.string
-    }),
-    setPageTitle: PropTypes.func.isRequired
+    setPageTitle: PropTypes.func.isRequired,
+    transitionClass: PropTypes.string,
+    wrapClass:PropTypes.string,
+    displayBackButton: PropTypes.bool,
+    requiresEvents: PropTypes.bool
   };
 
   // For static titles
   componentWillMount(){
-    if(this.props.title){
-      this.props.setPageTitle(this.props.title);
+    this.props.setPageTitle(this.props.title || '');
+    if(process.env.NODE_ENV !== 'test'){
+      window.scrollTo(0, 0);
     }
   }
 
@@ -54,54 +40,45 @@ export class DefaultLayout extends Component {
     }
   }
 
+  actions = {
+    goBack: () => {
+      const {title} = this.props;
+      trackClick(`Back button: ${title}`);
+      browserHistory.goBack();
+    }
+  };
+
   render () {
-    const {children, history} = this.props;
-    // Error and loading props
+    const {children, requiresData, transitionClass = 'slideUpFadeIn', wrapClass} = this.props;
     let {error, loading} = this.props;
-    error = error && error.failed === true ? <Error message={error.message} /> : null;
-    loading = loading === true ? <Spinner /> : null;
-    // Nav props
-    const {pathname, title, rightNav, leftNav = {title: 'Home', path: '/'}, goBack} = this.props;
+    error = requiresData && error && error.failed === true? <Error message={error.message} /> : null;
+    loading = requiresData && loading === true ? <Spinner /> : null;
     return (
-      <StickyContainer>
-        <div className="Layout">
-          <Header push={history.push} />
-          <Nav currentPath={pathname}
-               title={title}
-               rightNav={rightNav}
-               leftNav={leftNav}
-               goBack={goBack} />
-          <div className="container">
-            <div className="row">
-              <div className="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
-                <div className={pathname}>
-                  {error || loading || children}
-                </div>
-              </div>
+      <div className={classnames('container', transitionClass)}>
+        <div className="row">
+          <div className="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
+            <div className={wrapClass}>
+              {error || loading || children}
             </div>
           </div>
-          <Footer />
         </div>
-      </StickyContainer>
+      </div>
     );
   }
 }
 
 export default connect(
-  (state, props) => {
+  state => {
     return {
-      children: props.children,
       error: {
         failed: state.site.dataError,
         message: state.site.dataErrorMessage
       },
-      history: browserHistory,
       loading: state.site.loading,
-      pathname: props.pathname || props.location.pathname
+      currentTitle: state.site.title
     };
   },
   dispatch => ({
-    goBack: () => browserHistory.goBack(),
     setPageTitle: title => dispatch(setTitle(title))
   })
 )(DefaultLayout);

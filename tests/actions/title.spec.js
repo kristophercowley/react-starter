@@ -1,6 +1,6 @@
 import {expect} from 'chai';
 
-import setTitle from '../../src/actions/title_set';
+import {setTitle} from '../../src/actions/title';
 import {SET_TITLE} from '../../src/constants/ActionTypes';
 
 describe('(Action) Set Title', function() {
@@ -8,7 +8,7 @@ describe('(Action) Set Title', function() {
     const title = 'Test Title';
     const expected = {
       type: SET_TITLE,
-      title
+            title
     };
     const action = setTitle(title);
     expect(action).to.eql(expected);

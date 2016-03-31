@@ -1,14 +1,107 @@
-.fade-enter .container {
-  opacity: 0.01;
+@import "variables";
+
+.fader {
+  &.animate-enter {
+    opacity: 0.01;
+  }
+  &.animate-enter.animate-enter-active {
+    opacity: 1;
+    transition: opacity 500ms ease-in;
+  }
+  &.animate-leave {
+  }
+  &.animate-leave.animate-leave-active {
+  }
 }
-.fade-enter.fade-enter-active .container{
-  opacity: 1;
-  transition: opacity 500ms ease-in;
+
+.slideUpFadeIn {
+  &.animate-enter {
+    display: block;
+    opacity: 0.01;
+    transform-origin: 50% 50%;
+  }
+  &.animate-enter.animate-enter-active {
+    animation: slide-up-fade-in ease 500ms;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+    opacity: 1;
+  }
+  &.animate-leave {
+    display: none;
+  }
+  &.animate-leave.animate-leave-active {
+  }
 }
-.fade-leave .container {
-  opacity: 1;
+
+.toLeft {
+  &.animate-enter {
+    opacity: 0;
+  }
+  &.animate-enter.animate-enter-active {
+    opacity: 1;
+    animation: moveFromRight .5s ease both;
+  }
+  &.animate-leave {
+    opacity: 1;
+  }
+  &.animate-leave.animate-leave-active {
+    animation: moveToLeft 500ms ease both;
+  }
 }
-.fade-leave.fade-leave-active .container {
-  opacity: 0.01;
-  transition: opacity 300ms ease-in;
+
+@keyframes slide-up-fade-in {
+  0% {
+    opacity: 0;
+    transform: translate(0px, 40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translate(0px, 0px);
+  }
+}
+
+@keyframes slideDownFadeOut {
+  0% {
+    opacity: 1;
+    transform: translate(0, 0);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(0px, 40px);
+  }
+}
+
+@keyframes moveToLeft {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-110%);
+  }
+}
+
+@keyframes moveFromRight {
+  from {
+    transform: translateX(100%)
+  }
+  to {
+    transform: translateX(0%);
+  }
+}
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+    //transition: opacity 500ms ease-in;
+  }
 }
